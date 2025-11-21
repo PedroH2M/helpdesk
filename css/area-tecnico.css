@@ -1,0 +1,91 @@
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #d7d9de;
+            color: var(--text);
+        }
+
+        header {
+            background: #23272f;
+            color: white;
+            padding: 15px 25px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .container {
+            padding: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            max-width: 900px;
+            margin-bottom: 30px;
+        }
+
+        button {
+            padding: 10px 18px;
+            background: #3a3f47;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            opacity: .85;
+        }
+
+        /* POPUP */
+        .popup-bg {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup {
+            background: #f0f1f4;
+            padding: 30px;
+            border-radius: 12px;
+            width: 500px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+        }
+
+        .popup h2 {
+            margin-top: 0;
+        }
+
+        .popup input, .popup select, .popup textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        .popup textarea { height: 80px; resize: none; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th, table td {
+            border-bottom: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        table th {
+            background: #ececec;
+        }    
