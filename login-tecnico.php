@@ -38,7 +38,7 @@
                 header("Location: area-tecnico.php");
 
             } else {
-                echo "Falha ao logar! Usuário ou senha incorretos";
+                $erro = "<h3>Falha ao logar! Usuário ou senha incorretos</h3>";
             }
         }
     }
@@ -48,6 +48,12 @@
     <div class="login-box">
         <img src="img/logo.png" alt="ZappTech Logo" />
         <h2>Login do Técnico</h2>
+
+        <?php if(isset($erro)) { ?>
+            <div class="erro-login">
+                <?php echo $erro; ?>
+            </div>
+        <?php } ?>
 
         <form action="" method="POST">
             <div class="input-group">
