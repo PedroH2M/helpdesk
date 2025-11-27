@@ -6,19 +6,14 @@
     <link rel="stylesheet" href="css/area-gestor.css">
 </head>
 
-<?php
-
-include_once "admin/config.inc.php";
-
-    if(!isset($_SESSION)) {
-    session_start();
-}
-?>
 <body>
 
 <div class="header">
     Área do Gestor - HelpDesk
-    <button class="btn-sair">Sair</button>
+    <button onclick="window.location.href='login-gestor.php'" 
+        style="position:absolute; top:15px; right:20px; padding:8px 16px; 
+        background:#b33; color:#fff; border:none; border-radius:6px; cursor:pointer;">
+    Sair
 </div>
 
 <div class="main-container">
