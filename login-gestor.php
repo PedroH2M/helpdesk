@@ -54,13 +54,6 @@
 =======
         <form action="" method="POST">
 
-            <?php if(isset($erro)) { ?>
-                <div class="erro-login">
-                    <?php echo $erro; ?>
-                </div>
-            <?php } ?>
-
->>>>>>> fbe4ea070410005f4dd9106281c65f8bdbab6a82
             <div class="input-group">
                 <label>Usuário</label>
                 <input type="text" name="usuario" required />
@@ -77,4 +70,5 @@
         <a href="index.php" class="link">Voltar ao início</a>
     </div>
 </body>
+
 </html>
