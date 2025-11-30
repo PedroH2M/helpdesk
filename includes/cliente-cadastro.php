@@ -1,3 +1,31 @@
+<?php
+
+include_once "admin/config.inc.php";
+
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+
+    if(isset($_POST['form_tipo']) && $_POST['form_tipo'] == 'cliente'){
+    $nome = trim($_REQUEST['nome'] ?? '');
+    $cpf = $_REQUEST['cpf'] ?? '';
+    $email = $_REQUEST['email'] ?? '';
+    $telefone = $_REQUEST['telefone'] ??'';
+
+    if(empty($nome) || empty($cpf) || empty($email) || empty($telefone)){
+        echo "Erro";
+    }else{
+        $sql = "INSERT INTO clientes (nome, email, cpf, telefone) VALUES ('$nome', '$cpf', '$email', '$telefone')";
+        $inserir = mysqli_query($conexao, $sql);
+    }
+
+    if($inserir){
+
+    }
+    mysqli_close($conexao);
+    }
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,28 +65,3 @@
     
 </body>
 </html>
-
-<?php
-
-include_once "admin/config.inc.php";
-
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $nome = trim($_REQUEST['nome'] ?? '');
-    $cpf = $_REQUEST['cpf'] ?? '';
-    $email = $_REQUEST['email'] ?? '';
-    $telefone = $_REQUEST['telefone'] ??'';
-
-    if(empty($nome) || empty($cpf) || empty($email) || empty($telefone)){
-        echo "Erro";
-        exit;
-    }else{
-        $sql = "INSERT INTO clientes (nome, email, cpf, telefone) VALUES ('$nome', '$cpf', '$email', '$telefone')";
-        $inserir = mysqli_query($conexao, $sql);
-    }
-
-    if($inserir){
-    }
-    mysqli_close($conexao);
-}
-
-?>

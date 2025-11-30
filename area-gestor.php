@@ -65,59 +65,11 @@ if($listar == false){
     </div>
 </div>
 
-<?php include "cliente-cadastro.php"?>
+<?php include "includes/cliente-cadastro.php"?>
 
-<div class="modal" id="formCliente">
-    <div class="form-box">
-        <form action="" method="POST">
-            <h2>Cadastrar Cliente</h2>
+<?php include "includes/ocorrencia-cadastro.php"?>
 
-            <label>Nome do Cliente:</label>
-            <input type="text">
-
-            <label>CNPJ / CPF:</label>
-            <input type="text">
-
-            <label>Email:</label>
-            <input type="email">
-
-            <label>Telefone:</label>
-            <input type="text">
-
-            <div class="btn-group">
-                <button class="btn-salvar">Salvar</button>
-                <button class="btn-cancel" onclick="fecharFormularioCliente()">Cancelar</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<div class="modal" id="formFuncionario">
-    <div class="form-box">
-        <h2>Cadastrar Funcionário</h2>
-
-        <label>Nome do Funcionário:</label>
-        <input type="text">
-
-        <label>Usuário:</label>
-        <input type="text">
-
-        <label>Senha:</label>
-        <input type="password">
-
-        <label>Função:</label>
-        <select>
-            <option>Técnico</option>
-            <option>Gestor</option>
-            <option>Administrador</option>
-        </select>
-
-        <div class="btn-group">
-            <button class="btn-salvar">Salvar</button>
-            <button class="btn-cancel" onclick="fecharFormularioFuncionario()">Cancelar</button>
-        </div>
-    </div>
-</div>
+<?php include "includes/funcionario-cadastro.php" ?>
 
 <script>
 function abrirFormulario(){document.getElementById("formModal").style.display="flex";}
