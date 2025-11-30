@@ -49,18 +49,8 @@
         <img src="img/logo.png" alt="ZappTech Logo" />
         <h2>Login do Gestor</h2>
 
-<<<<<<< HEAD
-        <form action="area-gestor.php" method="POST">
-=======
         <form action="" method="POST">
 
-            <?php if(isset($erro)) { ?>
-                <div class="erro-login">
-                    <?php echo $erro; ?>
-                </div>
-            <?php } ?>
-
->>>>>>> fbe4ea070410005f4dd9106281c65f8bdbab6a82
             <div class="input-group">
                 <label>Usuário</label>
                 <input type="text" name="usuario" required />
