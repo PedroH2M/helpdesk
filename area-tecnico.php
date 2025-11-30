@@ -46,7 +46,6 @@
     </div>
 </div>
 
-<!-- POPUP -->
 <div class="popup-bg" id="popupBg">
     <div class="popup">
         <h2>Nova Ocorrência</h2>

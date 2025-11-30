@@ -11,7 +11,7 @@
         <img src="img/logo.png" alt="ZappTech Logo" />
         <h2>Login do Gestor</h2>
 
-        <form action="painel.php" method="POST">
+        <form action="area-gestor.php" method="POST">
             <div class="input-group">
                 <label>Usuário</label>
                 <input type="text" name="usuario" required />

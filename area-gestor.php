@@ -1,3 +1,17 @@
+<?php
+include_once "admin/config.inc.php";
+
+if(!isset($_SESSION)) session_start();
+
+
+$sql = "SELECT * FROM ocorrencias";
+$listar = mysqli_query($conexao,$sql);
+
+if($listar == false){
+    echo "Erro ao Listar" . mysqli_error($conexao);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -6,111 +20,112 @@
     <link rel="stylesheet" href="css/area-gestor.css">
 </head>
 
-<?php
-
-include_once "admin/config.inc.php";
-
-    if(!isset($_SESSION)) {
-    session_start();
-}
-?>
 <body>
 
 <div class="header">
     Área do Gestor - HelpDesk
-    <button class="btn-sair">Sair</button>
+    <button onclick="window.location.href='login-gestor.php'" class="btn-sair">Sair</button>
 </div>
 
 <div class="main-container">
     <div class="section">
         <h2>Abertura de Ocorrência</h2>
-        <button class="btn-nova" onclick="abrirFormulario()">Nova Ocorrência</button>
+        <div class="btn-group-top">
+            <button class="btn-nova" onclick="abrirFormulario()">Nova Ocorrência</button>
+            <button class="btn-nova" onclick="abrirFormularioCliente()">Cadastrar Cliente</button>
+            <button class="btn-nova" onclick="abrirFormularioFuncionario()">Cadastrar Funcionário</button>
+        </div>
     </div>
 
     <div class="section">
         <h2>Histórico de Ocorrências</h2>
-
         <table>
-            <tr>
+            <thead>
                 <th>Cliente</th>
                 <th>Técnico</th>
-                <th>Início</th>
+                <th>Inicio</th>
                 <th>Status</th>
                 <th>Ações</th>
-            </tr>
-            <tr>
-                <td>Empresa X</td>
-                <td>João</td>
-                <td>01/11/2025 14:00</td>
-                <td>Pendente</td>
-                <td>
-                    <button class="btn-editar">Editar</button>
-                    <button class="btn-excluir">Excluir</button>
-                </td>
-            </tr>
-            <tr>
-                <td>Empresa Y</td>
-                <td>Maria</td>
-                <td>02/11/2025 10:30</td>
-                <td>Concluída</td>
-                <td>
-                    <button class="btn-editar">Editar</button>
-                    <button class="btn-excluir">Excluir</button>
-                </td>
-            </tr>
+            </thead>
+            <tbody>
+                <?php if(mysqli_num_rows($listar) > 0): ?>
+                    <?php while($linha = mysqli_fetch_assoc($listar)): ?>
+                        <tr>
+                            <td><?php echo $linha['cliente'] ?></td>
+                            <td><?php echo $linha['tecnico'] ?></td>
+                            <td><?php echo $linha['inicio'] ?></td>
+                            <td><?php echo $linha['status_ocorrencia'] ?></td>
+                            <td> <a href="editar-gestor.php"><button class="btn-salvar">Editar</button></a> 
+                            <a href="editar-gestor.php"><button class="btn-cancel">Excluir</button></a></td>
+                        </tr>
+                    <?php endwhile;?>
+                    <?php endif;?>
+            </tbody>
         </table>
     </div>
-
 </div>
 
-<div class="modal" id="formModal">
+<?php include "cliente-cadastro.php"?>
+
+<div class="modal" id="formCliente">
     <div class="form-box">
-        <h2>Nova Ocorrência</h2>
+        <form action="" method="POST">
+            <h2>Cadastrar Cliente</h2>
 
-        <label>Cliente:</label>
-        <select>
-            <option>Selecione o cliente...</option>
-        </select>
+            <label>Nome do Cliente:</label>
+            <input type="text">
 
-        <label>Nome do Técnico:</label>
+            <label>CNPJ / CPF:</label>
+            <input type="text">
+
+            <label>Email:</label>
+            <input type="email">
+
+            <label>Telefone:</label>
+            <input type="text">
+
+            <div class="btn-group">
+                <button class="btn-salvar">Salvar</button>
+                <button class="btn-cancel" onclick="fecharFormularioCliente()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal" id="formFuncionario">
+    <div class="form-box">
+        <h2>Cadastrar Funcionário</h2>
+
+        <label>Nome do Funcionário:</label>
         <input type="text">
 
-        <label>Início:</label>
-        <div class="date-time">
-            <input type="date">
-            <input type="time">
-        </div>
+        <label>Usuário:</label>
+        <input type="text">
 
-        <label>Fim:</label>
-        <div class="date-time">
-            <input type="date">
-            <input type="time">
-        </div>
+        <label>Senha:</label>
+        <input type="password">
 
-        <label>Motivo da ocorrência:</label>
-        <textarea></textarea>
-
-        <label>Status:</label>
+        <label>Função:</label>
         <select>
-            <option>Pendente</option>
-            <option>Em andamento</option>
-            <option>Concluída</option>
+            <option>Técnico</option>
+            <option>Gestor</option>
+            <option>Administrador</option>
         </select>
 
         <div class="btn-group">
             <button class="btn-salvar">Salvar</button>
-            <button class="btn-cancel" onclick="fecharFormulario()">Cancelar</button>
+            <button class="btn-cancel" onclick="fecharFormularioFuncionario()">Cancelar</button>
         </div>
     </div>
 </div>
 
 <script>
-    function abrirFormulario() {
-        document.getElementById("formModal").style.display = "flex";
-    }
-    function fecharFormulario() {
-        document.getElementById("formModal").style.display = "none";
-    }
+function abrirFormulario(){document.getElementById("formModal").style.display="flex";}
+function fecharFormulario(){document.getElementById("formModal").style.display="none";}
+function abrirFormularioCliente(){document.getElementById("formCliente").style.display="flex";}
+function fecharFormularioCliente(){document.getElementById("formCliente").style.display="none";}
+function abrirFormularioFuncionario(){document.getElementById("formFuncionario").style.display="flex";}
+function fecharFormularioFuncionario(){document.getElementById("formFuncionario").style.display="none";}
 </script>
 
 </body>
