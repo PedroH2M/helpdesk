@@ -40,7 +40,7 @@
         <form action="" method="post">
             <h2>Cadastrar Funcionário</h2>
 
-            <input type="hidden" name="form_tipo" value="funcionarios"> <!-- saber qual formulario vem os dados -->
+            <input type="hidden" name="form_tipo" value="funcionarios"> 
 
             <label>Nome do Funcionário:</label>
             <input type="text" name="nome" required>
@@ -52,7 +52,7 @@
             <input type="text" name="email" required>
 
             <label>Função:</label>
-            <select name="funcao">
+            <select name="funcao" required>
                 <option >Técnico</option>
                 <option >Gestor</option>
                 <option >Administrador</option>

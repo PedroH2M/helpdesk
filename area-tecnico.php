@@ -49,17 +49,10 @@
     </div>
 </div>
 
-<<<<<<< HEAD
-<div class="popup-bg" id="popupBg">
-    <div class="popup">
-        <h2>Nova Ocorrência</h2>
-=======
-<!-- POPUP -->
  <form action="admin/ocorrencia-cadastro.php">
     <div class="popup-bg" id="popupBg">
         <div class="popup">
             <h2>Nova Ocorrência</h2>
->>>>>>> fbe4ea070410005f4dd9106281c65f8bdbab6a82
 
             <label>Cliente:</label>
             <select id="cliente">

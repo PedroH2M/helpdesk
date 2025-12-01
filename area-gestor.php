@@ -55,8 +55,14 @@ if($listar == false){
                             <td><?php echo $linha['tecnico'] ?></td>
                             <td><?php echo $linha['inicio'] ?></td>
                             <td><?php echo $linha['status_ocorrencia'] ?></td>
-                            <td> <a href="editar-gestor.php"><button class="btn-salvar">Editar</button></a> 
-                            <a href="editar-gestor.php"><button class="btn-cancel">Excluir</button></a></td>
+                            <td>
+                                <button class="btn-salvar" onclick="abrirFormularioEditar('<?= $linha['id'] ?>',
+                                '<?= $linha['cliente'] ?>',
+                                '<?= $linha['tecnico'] ?>',
+                                '<?= $linha['status_ocorrencia'] ?>'
+                                )">Editar</button>
+                                <a href="editar-gestor.php?id=<?= $linha['id'] ?>"><button class="btn-cancel">Excluir</button></a>
+                            </td>
                         </tr>
                     <?php endwhile;?>
                     <?php endif;?>
@@ -71,13 +77,26 @@ if($listar == false){
 
 <?php include "includes/funcionario-cadastro.php" ?>
 
+<?php include "includes/ocorrencias-editar.php" ?>
+
 <script>
-function abrirFormulario(){document.getElementById("formModal").style.display="flex";}
-function fecharFormulario(){document.getElementById("formModal").style.display="none";}
-function abrirFormularioCliente(){document.getElementById("formCliente").style.display="flex";}
-function fecharFormularioCliente(){document.getElementById("formCliente").style.display="none";}
-function abrirFormularioFuncionario(){document.getElementById("formFuncionario").style.display="flex";}
-function fecharFormularioFuncionario(){document.getElementById("formFuncionario").style.display="none";}
+function abrirFormulario(){document.getElementById("formModal").style.display = "flex";}
+function fecharFormulario(){document.getElementById("formModal").style.display = "none";}
+function abrirFormularioCliente(){document.getElementById("formCliente").style.display = "flex";}
+function fecharFormularioCliente(){document.getElementById("formCliente").style.display = "none";}
+function abrirFormularioFuncionario(){document.getElementById("formFuncionario").style.display = "flex";}
+function fecharFormularioFuncionario(){document.getElementById("formFuncionario").style.display = "none";}
+
+function abrirFormularioEditar(id,cliente, tecnico, status){
+    document.getElementById("formEditar").style.display = "flex";
+    document.getElementById("id").value = id;
+    document.getElementById("cliente").value = cliente;
+    document.getElementById("tecnico").value = tecnico;
+    document.getElementById("status").value = status;
+}
+function fecharFormularioEditar() {
+    document.getElementById("formEditar").style.display = "none";
+}
 </script>
 
 </body>

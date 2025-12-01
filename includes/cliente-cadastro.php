@@ -53,7 +53,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             <input type="email" name="email" required>
 
             <label>Telefone:</label>
-            <input type="text" name="telefone">
+            <input type="text" name="telefone" required>
 
             <div class="btn-group">
                 <button type="submit" class="btn-salvar">Salvar</button>
