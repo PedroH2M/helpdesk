@@ -7,12 +7,15 @@
     <link rel="stylesheet" href="css/area-tecnico.css">
 <body>
     
-<?php 
+<?php
+    require_once "admin/config.inc.php";
+    $sql = "SELECT * FROM ocorrencias";
+    $resultado = mysqli_query($conexao,$sql);
+
     if(!isset($_SESSION)) {
     session_start();
 }
 ?>
-
 
 <header>Área do Técnico - HelpDesk</header>
 
@@ -46,45 +49,43 @@
     </div>
 </div>
 
-<!-- POPUP -->
-<div class="popup-bg" id="popupBg">
-    <div class="popup">
-        <h2>Nova Ocorrência</h2>
+ <form action="admin/ocorrencia-cadastro.php">
+    <div class="popup-bg" id="popupBg">
+        <div class="popup">
+            <h2>Nova Ocorrência</h2>
 
-        <label>Cliente:</label>
-        <select id="cliente">
-            <option value="">Selecione o cliente...</option>
-            <option>Empresa Alpha</option>
-            <option>Loja XPTO</option>
-            <option>Clínica Vida+</option>
-            <option>Construtora Real</option>
-        </select>
-        <input type="text" id="tecnico" placeholder="Nome do Técnico" />
+            <label>Cliente:</label>
+            <select id="cliente">
+                <option value="">Selecione o cliente...</option>
+                <option>Empresa Alpha</option>
+                <option>Loja XPTO</option>
+                <option>Clínica Vida+</option>
+                <option>Construtora Real</option>
+            </select>
+            <input type="text" id="tecnico" placeholder="Nome do Técnico" name="tecnico"/>
 
-        <label>Início:</label>
-        <div style="display:flex; gap:10px;">
-            <input type="date" id="data_inicio" />
-            <input type="time" id="hora_inicio" />
-        </div>
-
-        <label>Fim:</label>
-        <div style="display:flex; gap:10px;">
-            <input type="date" id="data_fim" />
-            <input type="time" id="hora_fim" />
-        </div>
-
-        <textarea id="motivo" placeholder="Motivo da ocorrência"></textarea>
-
-        <select id="status">
-            <option>Pendente</option>
-            <option>Em andamento</option>
-            <option>Finalizado</option>
-        </select>
-
-        <button onclick="salvarOcorrencia()">Salvar</button>
-        <button style="background:#b33" onclick="fecharPopup()">Cancelar</button>
+            
+                <label>Início:</label>
+                <div style="display:flex; gap:10px;">
+                    <input type="date" id="data_inicio" name="data_inicio" />
+                    <input type="time" id="hora_inicio" name="hora_inicio" />
+                </div>
+                <label>Fim:</label>
+                <div style="display:flex; gap:10px;">
+                    <input type="date" id="data_fim" name="data_fim"/>
+                    <input type="time" id="hora_fim" name="hora_fim"/>
+                </div>
+                <textarea id="motivo" placeholder="Motivo da ocorrência" name="motivo"></textarea>
+                <select id="status" name="status">
+                    <option>Pendente</option>
+                    <option>Em andamento</option>
+                    <option>Finalizado</option>
+                </select>
+                <button type="submit" onclick="salvarOcorrencia()">Salvar</button>
+                <button type="button" style="background:#b33" onclick="fecharPopup()">Cancelar</button>
+                    </div>
     </div>
-</div>
+</form>
 
 <script>
 function abrirPopup() {

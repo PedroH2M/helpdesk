@@ -1,0 +1,132 @@
+         body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(160deg, #071a33, #040e19);
+            color: #e6f1ff;
+        }
+
+        /* ---------------- HEADER ---------------- */
+        header {
+            background: rgba(0, 20, 50, 0.6);
+            backdrop-filter: blur(12px);
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 110, 255, 0.3);
+        }
+
+        header img {
+            width: 48px;
+        }
+
+        nav a {
+            margin-left: 25px;
+            color: #7fc5ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #bfe5ff;
+        }
+
+        /* ---------------- HERO ---------------- */
+        .hero {
+            text-align: center;
+            padding: 120px 20px;
+            background: radial-gradient(circle at top, rgba(33, 64, 96, 0.15), transparent 70%);
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            text-shadow: 0 0 12px rgba(20, 43, 61, 0.6);
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-top: -10px;
+            color: #a8d7ff;
+        }
+
+        .btn {
+            padding: 14px 26px;
+            border-radius: 14px;
+            border: none;
+            margin: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+            background: #0284ff;
+            color: white;
+            box-shadow: 0 4px 14px rgba(0, 132, 255, 0.4);
+        }
+
+        .btn:hover {
+            background: #4dabff;
+        }
+
+        /* ---------------- CARDS ---------------- */
+        .cards {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 80px 30px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.04);
+            border-radius: 22px;
+            padding: 40px;
+            width: 300px;
+            text-align: center;
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: inset 4px 4px 12px rgba(255,255,255,0.05),
+                        inset -4px -4px 12px rgba(0,0,0,0.4),
+                        0 0 18px rgba(0,140,255,0.15);
+        }
+
+        .card h3 {
+            color: #76c9ff;
+        }
+
+        /* ---------------- COMO FUNCIONA ---------------- */
+        .steps {
+            padding: 60px 30px;
+            text-align: center;
+        }
+
+        .steps div {
+            margin: 18px 0;
+            font-size: 20px;
+            color: #bfe5ff;
+        }
+
+        /* ---------------- STATUS ---------------- */
+        .status-box {
+            margin: 60px auto;
+            max-width: 600px;
+            background: rgba(0, 40, 90, 0.4);
+            padding: 28px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(0,110,255,0.3);
+            box-shadow: 0 0 18px rgba(0,140,255,0.2);
+        }
+
+        .status-item {
+            margin: 10px 0;
+        }
+
+        /* ---------------- FOOTER ---------------- */
+        footer {
+            margin-top: 60px;
+            padding: 25px;
+            text-align: center;
+            font-size: 14px;
+            color: #7bbcff;
+        }
+
+   
