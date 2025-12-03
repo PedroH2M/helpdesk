@@ -1,6 +1,12 @@
 <?php
 include_once "admin/config.inc.php";
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
+    $id = intval($_POST['delete_id']);
+    mysqli_query($conexao, "DELETE FROM ocorrencias WHERE id = $id");
+}
+
+
 if(!isset($_SESSION)) session_start();
 
 
@@ -61,7 +67,10 @@ if($listar == false){
                                 '<?= $linha['tecnico'] ?>',
                                 '<?= $linha['status_ocorrencia'] ?>'
                                 )">Editar</button>
-                                <a href="editar-gestor.php?id=<?= $linha['id'] ?>"><button class="btn-cancel">Excluir</button></a>
+                                <form method="POST" style="display:inline;">
+                                    <input type="hidden" name="delete_id" value="<?= $linha['id'] ?>">
+                                    <button class="btn-cancel" type="submit">Excluir</button>
+                                </form>
                             </td>
                         </tr>
                     <?php endwhile;?>

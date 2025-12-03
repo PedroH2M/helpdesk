@@ -6,16 +6,16 @@
         if(isset($_POST['form_tipo']) && $_POST['form_tipo'] == 'funcionarios'){
 
         $nome = trim($_REQUEST['nome'] ?? '');
-        $cpf = $_REQUEST['cpf'] ?? '';
-        $email = $_REQUEST['email']?? '';
+        $login = $_REQUEST['login'] ?? '';
+        $senha = $_REQUEST['senha']?? '';
         $funcao = $_REQUEST['funcao']?? '';
 
 
-        if(empty($nome) || empty($cpf) || empty($email) || empty($funcao)){
+        if(empty($nome) || empty($login) || empty($senha) || empty($funcao)){
             echo "Ero" . mysqli_error($conexao);
             exit;
         }else{
-            $sql = "INSERT INTO funcionarios (nome, cpf, email, funcao) VALUES ('$nome', '$cpf', '$email', '$funcao')";
+            $sql = "INSERT INTO usuarios (usuario, senha, nome, funcao) VALUES ('$login', '$senha', '$nome', '$funcao')";
             $inserir = mysqli_query($conexao, $sql);
 
         }
@@ -45,17 +45,16 @@
             <label>Nome do Funcionário:</label>
             <input type="text" name="nome" required>
 
-            <label>CPF:</label>
-            <input type="text" name="cpf" required>
+            <label>Login: </label>
+            <input type="text" name="login" required>
 
-            <label>email:</label>
-            <input type="text" name="email" required>
+            <label>Senha: </label>
+            <input type="password" name="senha" required>
 
-            <label>Função:</label>
+            <label>Função: </label>
             <select name="funcao" required>
                 <option >Técnico</option>
                 <option >Gestor</option>
-                <option >Administrador</option>
             </select>
 
         <div class="btn-group">
