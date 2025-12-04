@@ -10,7 +10,7 @@
     <?php 
         include('admin/config.inc.php');
 
-    if(isset($_POST['usuario']) || isset($_POST['senha'])) {
+        if(isset($_POST['usuario']) || isset($_POST['senha'])) {
 
         if(strlen($_POST['usuario']) == 0 ){
             echo "Preencha seu usuário";
@@ -21,7 +21,7 @@
             $usuario = $conexao->real_escape_string($_POST['usuario']);
             $senha = $conexao->real_escape_string($_POST['senha']);
 
-            $sql_code = "SELECT * FROM usuarios where usuario = '$usuario' AND senha = '$senha'";
+            $sql_code = "SELECT * FROM usuarios where usuario = '$usuario' AND senha_usuario = '$senha'";
             $sql_query = $conexao->query($sql_code) or die("Falha na execução do código SQL: " . $conexao->error);
 
             $quantidade  = $sql_query->num_rows;
@@ -34,11 +34,12 @@
                     session_start();
                 }
                 $_SESSION['id'] = $usuario['id'];
+                $_SESSION['tecnico'] = $usuario['usuario']; 
 
                 header("Location: area-tecnico.php");
 
             } else {
-                echo "Falha ao logar! Usuário ou senha incorretos";
+                $erro = "<h3>Falha ao logar! Usuário ou senha incorretos</h3>";
             }
         }
     }
@@ -48,6 +49,12 @@
     <div class="login-box">
         <img src="img/logo.png" alt="ZappTech Logo" />
         <h2>Login do Técnico</h2>
+
+        <?php if(isset($erro)) { ?>
+            <div class="erro-login">
+                <?php echo $erro; ?>
+            </div>
+        <?php } ?>
 
         <form action="" method="POST">
             <div class="input-group">
@@ -61,7 +68,6 @@
             </div>
         
             <button class="btn-login" type="submit" ">Entrar</button>
-            
         </form>
 
         <a href="index.php" class="link">Voltar ao início</a>
