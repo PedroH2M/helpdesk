@@ -6,13 +6,18 @@
     <title>Área do Técnico - HelpDesk</title>
     <link rel="stylesheet" href="css/area-tecnico.css">
 <body>
-    
+
 <?php 
+    require_once "admin/config.inc.php";
     if(!isset($_SESSION)) {
     session_start();
-}
-?>
+    }
 
+    $tecnico = $_SESSION['tecnico']; 
+
+    $sql = "SELECT * FROM ocorrencias WHERE tecnico = '$tecnico'";
+    $resultado = mysqli_query($conexao,$sql);
+?>
 
 <header>Área do Técnico - HelpDesk</header>
 
@@ -40,6 +45,19 @@
                     <th>Fim</th>
                     <th>Status</th>
                 </tr>
+        <?php 
+        while($dados = mysqli_fetch_array($resultado)) {
+        ?>
+                <tr>
+                    <td><?= $dados['cliente'] ?></td>
+                    <td><?= $dados['tecnico'] ?></td>
+                    <td><?= $dados['data_inicio'] . " " . $dados['inicio'] ?></td>
+                    <td><?= $dados['data_fim'] . " " . $dados['fim'] ?></td>
+                    <td><?= $dados['status_ocorrencia'] ?></td>
+                </tr>
+        <?php 
+            }
+        ?>
             </thead>
             <tbody id="historico"></tbody>
         </table>
@@ -47,44 +65,59 @@
 </div>
 
 <!-- POPUP -->
-<div class="popup-bg" id="popupBg">
-    <div class="popup">
-        <h2>Nova Ocorrência</h2>
+ <form action="admin/ocorrencia-cadastro-tecnico.php">
+    <div class="popup-bg" id="popupBg">
+        <div class="popup">
+            <h2>Nova Ocorrência</h2>
 
-        <label>Cliente:</label>
-        <select id="cliente">
-            <option value="">Selecione o cliente...</option>
-            <option>Empresa Alpha</option>
-            <option>Loja XPTO</option>
-            <option>Clínica Vida+</option>
-            <option>Construtora Real</option>
-        </select>
-        <input type="text" id="tecnico" placeholder="Nome do Técnico" />
+            <label>Cliente:</label>
+            <input list="listaclientes" id="cliente" name="cliente" placeholder="Digite o nome do cliente...">
+            <datalist id="listaclientes">
+                <?php 
+                    $sql = "SELECT id, nome FROM clientes ORDER BY nome ASC";
+                    $result = $conexao->query($sql);
 
-        <label>Início:</label>
-        <div style="display:flex; gap:10px;">
-            <input type="date" id="data_inicio" />
-            <input type="time" id="hora_inicio" />
-        </div>
+                    while($row = $result->fetch_assoc()){
+                        echo '<option value="'.$row['nome'].'">'.$row['id'].'</option>';
+                    }
+                ?>
+            </datalist>
 
-        <label>Fim:</label>
-        <div style="display:flex; gap:10px;">
-            <input type="date" id="data_fim" />
-            <input type="time" id="hora_fim" />
-        </div>
+            <label>Técnico:</label>
+            <input list="listaTecnicos" id="tecnico" name="tecnico" placeholder="Digite o nome do técnico...">
 
-        <textarea id="motivo" placeholder="Motivo da ocorrência"></textarea>
+            <datalist id="listaTecnicos">
+                <?php
+                    $sql = "SELECT id, usuario FROM usuarios ORDER BY usuario ASC";
+                    $result = $conexao->query($sql);
 
-        <select id="status">
-            <option>Pendente</option>
-            <option>Em andamento</option>
-            <option>Finalizado</option>
-        </select>
+                    while($row = $result->fetch_assoc()){
+                        echo '<option value="'.$row['usuario'].'" data-id="'.$row['id'].'"></option>';
+                    }
+                ?>
+            </datalist>
 
-        <button onclick="salvarOcorrencia()">Salvar</button>
-        <button style="background:#b33" onclick="fecharPopup()">Cancelar</button>
+                <label>Início:</label>
+                <div style="display:flex; gap:10px;">
+                    <input type="date" id="data_inicio" name="data_inicio" />
+                    <input type="time" id="hora_inicio" name="hora_inicio" />
+                </div>
+                <label>Fim:</label>
+                <div style="display:flex; gap:10px;">
+                    <input type="date" id="data_fim" name="data_fim"/>
+                    <input type="time" id="hora_fim" name="hora_fim"/>
+                </div>
+                <textarea id="motivo" placeholder="Motivo da ocorrência" name="motivo"></textarea>
+                <select id="status" name="status">
+                    <option>Pendente</option>
+                    <option>Em andamento</option>
+                    <option>Finalizado</option>
+                </select>
+                <button type="submit" onclick="salvarOcorrencia()">Salvar</button>
+                <button type="button" style="background:#b33" onclick="fecharPopup()">Cancelar</button>
+                    </div>
     </div>
-</div>
+</form>
 
 <script>
 function abrirPopup() {
@@ -105,21 +138,13 @@ function salvarOcorrencia() {
 
     const tabela = document.getElementById("historico");
 
-    const linha = `
-        <tr>
-            <td>${cliente}</td>
-            <td>${tecnico}</td>
-            <td>${inicio}</td>
-            <td>${fim}</td>
-            <td>${status}</td>
-        </tr>
-    `;
-
     tabela.innerHTML += linha;
 
     fecharPopup();
 }
 </script>
 
+    
+</tbody>
 </body>
 </html>

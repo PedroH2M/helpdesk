@@ -7,11 +7,56 @@
     <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
+    <?php
+        include('admin/config.inc.php');
+
+        if(isset($_POST['usuario']) || isset($_POST['senha'])) {
+
+        if(strlen($_POST['usuario']) == 0 ){
+            echo "Preencha seu usuário";
+        } else if (strlen($_POST['senha']) == 0){
+            echo "Preencha sua senha";
+        } else {
+            
+            $usuario = $conexao->real_escape_string($_POST['usuario']);
+            $senha = $conexao->real_escape_string($_POST['senha']);
+
+            $sql_code = "SELECT * FROM gestores where gestor = '$usuario' AND senha_gestor = '$senha'";
+            $sql_query = $conexao->query($sql_code) or die("Falha na execução do código SQL: " . $conexao->error);
+
+            $quantidade  = $sql_query->num_rows;
+
+            if($quantidade == 1) {
+
+                $usuario = $sql_query->fetch_assoc();
+
+                if(!isset($_SESSION)) {
+                    session_start();
+                }
+                $_SESSION['id'] = $usuario['id'];
+
+                header("Location: area-gestor.php");
+
+            } else {
+                $erro = "<h3>Falha ao logar! Usuário ou senha incorretos<h3>";
+            }
+        }
+    }
+    ?>
+
+
     <div class="login-box">
         <img src="img/logo.png" alt="ZappTech Logo" />
         <h2>Login do Gestor</h2>
 
-        <form action="painel.php" method="POST">
+        <form action="" method="POST">
+
+            <?php if(isset($erro)) { ?>
+                <div class="erro-login">
+                    <?php echo $erro; ?>
+                </div>
+            <?php } ?>
+
             <div class="input-group">
                 <label>Usuário</label>
                 <input type="text" name="usuario" required />
